@@ -58,6 +58,11 @@ def test_FastaFormat():
     Test to make sure that a fasta file is being read in if a fastq file is
     read, the first item is None
     """
+    parser = FastaParser("test_data.fastq")
+    #expected to raise a ValueError for invalid format
+    with pytest.raises(ValueError):  
+        #list(parser) should raise an error as the parser encounters lines it cannot interprest as FASTA
+        sequences = list(parser) 
     pass
 
 
