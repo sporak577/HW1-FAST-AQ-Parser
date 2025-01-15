@@ -33,6 +33,23 @@ def test_FastaParser():
     files that are blank or corrupted in some way. Two example Fasta files are
     provided in /tests/bad.fa and /tests/empty.fa
     """
+    #creating an instance of FastaParser and passing the test file path
+    #this is the first time I am doing this so I am getting help from AI!
+    parser = FastaParser("test_data.fa")
+    #using list() to consume the iterable and get all sequences
+    #collects records into a list, where each record is a tuple representing a sequence
+    #e.g. sequences = [("seq1, 'sequence"), ("seq2", "sequence2" )]
+    sequences = list(parser)
+    #this checks that the number of sequences of my file is 2
+    assert len(sequences) == 2
+    #check the content of first sequences
+    assert sequences[0][0] == "seq1"
+    assert sequences[0][1] == "GGCTAGCTAGTC"
+
+    assert sequences[1][0] == "seq2"
+    assert sequences[1][1] == "CGTATACTAGCA"
+
+
     pass
 
 
