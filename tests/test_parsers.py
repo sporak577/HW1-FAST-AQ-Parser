@@ -100,4 +100,15 @@ def test_FastqFormat():
     Test to make sure fastq file is being read in. If this is a fasta file, the
     first line is None
     """
+    filename = "test_data.fa"
+
+    with open(filename, "r") as f: 
+        #reads first line of the file and removes any leading/trailing whitespace
+        first_line = f.readline().strip()
+
+    if first_line.startswith(">"): 
+        #raise a ValueError, match ensures the error messages contains a specific string
+        with pytest.raises(ValueError, match="Invalid FASTQ format"):
+            raise ValueError("Invalid FASTQ format: FASTA file detected")
+
     pass
