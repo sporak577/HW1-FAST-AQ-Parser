@@ -12,15 +12,9 @@ def transcribe(seq: str, reverse: bool = False) -> str:
     """
     transcribed_seq = ""
     for nucleotide in seq:
-        #extracts the value from the dictionary, so the RNA nucleotide
-        if nucleotide == "T":
-            transcribed_seq += "U"
-        else:
-            transcribed_seq += str(nucleotide)
+        transcribed_seq += TRANSCRIPTION_MAPPING[nucleotide]
+    return transcribed_seq
     
-    print(transcribed_seq)
-
-    pass
 
 def reverse_transcribe(seq: str) -> str:
     """
@@ -35,10 +29,10 @@ def reverse_transcribe(seq: str) -> str:
         else: 
             rev_transcribed_seq += nucleotide
 
-    print(rev_transcribed_seq)
+    return rev_transcribed_seq
 
     pass
 
 #testing 
-transcribe("ATGCCT")
-reverse_transcribe("UACGGA")
+print(transcribe("ATGCCT"))      
+print(reverse_transcribe("UACGGA"))
