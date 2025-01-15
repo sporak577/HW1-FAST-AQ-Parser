@@ -26,7 +26,7 @@ def test_transcribe():
     Write your unit test for the transcribe function here.
     """
     result = transcribe("CGTA")
-    assert result == 'CGUA', f"Expected GCUA but got {result}"
+    assert result == "CGUA", f"Expected CGUA but got {result}"
 
     result = transcribe("")
     #assert is used to ensure that the actual output matches the expected result
