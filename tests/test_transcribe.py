@@ -25,6 +25,13 @@ def test_transcribe():
     """
     Write your unit test for the transcribe function here.
     """
+    result = transcribe("CGTA")
+    assert result == 'CGUA', f"Expected GCUA but got {result}"
+
+    result = transcribe("")
+    #assert is used to ensure that the actual output matches the expected result
+    assert result == "", f'Expected empty string but got {result}'
+
     pass
 
 
@@ -32,4 +39,10 @@ def test_reverse_transcribe():
     """
     Write your unit test for the reverse transcribe function here.
     """
+    result = reverse_transcribe("UGCA")
+    assert result == "TGCA"
+
+    result = reverse_transcribe("")
+    assert result == ""
+
     pass
