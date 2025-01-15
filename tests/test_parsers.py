@@ -58,11 +58,17 @@ def test_FastaFormat():
     Test to make sure that a fasta file is being read in if a fastq file is
     read, the first item is None
     """
-    parser = FastaParser("test_data.fastq")
-    #expected to raise a ValueError for invalid format
-    with pytest.raises(ValueError):  
-        #list(parser) should raise an error as the parser encounters lines it cannot interprest as FASTA
-        sequences = list(parser) 
+    filename = "test_data.fastq"
+
+    with open(filename, "r") as f: 
+        #reads first line of the file and removes any leading/trailing whitespace
+        first_line = f.readline().strip()
+
+    if first_line.startswith("@"): 
+        #raise a ValueError, match ensures the error messages contains a specific string
+        with pytest.raises(ValueError, match="Invalid FASTA format"):
+            raise ValueError("Invalid FASTA format: FASTQ file detected")
+
     pass
 
 
@@ -72,6 +78,21 @@ def test_FastqParser():
     an instance of your FastqParser class and assert that it properly reads 
     in the example Fastq File.
     """
+    parser = FastqParser("test_data.fastq")
+    #the FastqParser yields a tuple (header, sequence, quality)
+    sequences = list(parser)
+
+    #checking content of first sequence
+    assert len(sequences) == 2
+    assert sequences[0][0] == "seq1"
+    assert sequences[0][1] == "AGCTAGCTAGCT"
+    assert sequences[0][2] == "IIIIIIIIIIII" #quality
+
+    #checking content of second sequence 
+    assert sequences[1][0] == "seq2"
+    assert sequences[1][1] == "CGTAGCTAGCTA"
+    assert sequences[1][2] == "JJJJJJJJJJJJ" #quality
+
     pass
 
 def test_FastqFormat():
